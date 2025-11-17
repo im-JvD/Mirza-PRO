@@ -187,7 +187,7 @@ if (intval($reportbackup) == 0) {
         'chat_id' => $setting['Channel_Report'],
         'name' => "🤖 بکاپ ربات نماینده"
     ]);
-    if ($createForumTopic['result']['message_thread_id'] != null) {
+    if (isset($createForumTopic['result']['message_thread_id']) && $createForumTopic['result']['message_thread_id'] != null) {
         update("topicid", "idreport", $createForumTopic['result']['message_thread_id'], "report", "backupfile");
     }
 }
@@ -3583,7 +3583,7 @@ $text";
             ],
         ]
     ]);
-    sendmessage($trakingdetail['iduser'], $textSendAdminToUser, $Response, 'HTML');
+    sendmessage(chat_id: $trakingdetail['iduser'], text: $textSendAdminToUser, reply_markup: $Response, parse_mode: 'HTML');
     sendmessage($from_id, "پیام با موفقیت ارسال گردید", null, 'HTML');
     step("home", $from_id);
 } elseif (preg_match('/Responsesusera_(\w+)/', $datain, $dataget)) {
@@ -3632,7 +3632,7 @@ $text";
         sendvideo($trakingdetail['idsupport'], $videoid, null);
     }
     sendmessage($trakingdetail['idsupport'], $textsuppoer, $Response, 'HTML');
-    sendmessage($from_id, text: "✅  پیام شما برای این درخواست با موفقیت ارسال گردید پس از بررسی پاسخ داده خواهد شد.", null, 'HTML');
+    sendmessage(chat_id: $from_id, text: "✅ پیام شما برای این درخواست با موفقیت ارسال گردید پس از بررسی پاسخ داده خواهد شد.", reply_markup: null, parse_mode: 'HTML');
 } elseif ($datain == "fqQuestions") {
     sendmessage($from_id, $datatextbot['text_dec_fq'], null, 'HTML');
 } elseif ($text == $datatextbot['accountwallet'] || $datain == "account" || $text == "/wallet") {
